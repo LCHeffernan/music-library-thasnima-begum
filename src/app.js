@@ -1,5 +1,6 @@
 const express = require('express');
 const artistRouter = require('./routes/artist')
+const albumRouter = require('./routes/album')
 
 const app = express();
 
@@ -10,5 +11,7 @@ app.get("/", (_req, res) => {
 });
 
 app.use('/', artistRouter)
+
+app.use('/', albumRouter)
 
 module.exports = app;

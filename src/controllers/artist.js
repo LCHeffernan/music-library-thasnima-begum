@@ -30,7 +30,7 @@ const getArtistById = async (req, res) => {
       return res.status(404).json({message: `artist ${id} does not exist`})
     }
 
-    res.status(200).json(artist[0])
+    res.status(200).json(artist)
   } catch (error){
     res.status(500).json(error.message)
   }
