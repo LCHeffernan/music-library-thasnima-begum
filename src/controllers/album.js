@@ -38,6 +38,9 @@ const updateAlbumById = async (req, res) => {
     const {name, year} = req.body
     const {id} = req.params
     const {rows: [album]} = await db.query('UPDATE albums SET name=$1, year=$2 WHERE id=$3 RETURNING *', [name, year, id])
+    if (!album){
+      return res.status(500).json({message: 'This album does not exist'})
+    }
     res.status(200).json(album)
   } catch(error){
     res.status(500).json(error)
@@ -79,6 +82,9 @@ const deleteAlbumById = async (req, res) => {
     const {id} = req.params;
     
     const {rows:[album]} = await db.query('DELETE FROM albums WHERE id=$1 RETURNING *', [id])
+    if (!album){
+      return res.status(500).json({message: 'This album does not exist'})
+    }
     res.status(200).json(album)
   }catch(error){
     res.status(500).json(error)
