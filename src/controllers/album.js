@@ -38,7 +38,7 @@ const updateAlbumById = async (req, res) => {
     const {name, year} = req.body
     const {id} = req.params
     const {rows: [album]} = await db.query('UPDATE albums SET name=$1, year=$2 WHERE id=$3 RETURNING *', [name, year, id])
-    res.status(201).json(album)
+    res.status(200).json(album)
   } catch(error){
     res.status(500).json(error)
   }
